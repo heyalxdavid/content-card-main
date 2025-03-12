@@ -98,21 +98,26 @@ export const DefaultCard: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     
-    // Find and verify heading
-    const heading = await canvas.findByRole('heading', { name: /Modern Design System/i });
-    await expect(heading).toBeInTheDocument();
+    // Find the card container
+    const card = canvas.getByRole('button');
+    expect(card).toBeInTheDocument();
     
-    // Find and verify buttons
-    const buttons = await canvas.findAllByRole('button');
-    await expect(buttons).toHaveLength(2);
+    // Find and verify heading
+    const heading = canvas.getByRole('heading', { name: /Modern Design System/i });
+    expect(heading).toBeInTheDocument();
+    
+    // Find and verify buttons within the card
+    const buttonContainer = canvas.getByRole('button').querySelector('div');
+    const buttons = buttonContainer ? within(buttonContainer).getAllByRole('button') : [];
+    expect(buttons).toHaveLength(2);
     
     // Find and verify footer
-    const footer = await canvas.findByText(/Last updated 2 days ago/i);
-    await expect(footer).toBeInTheDocument();
+    const footer = canvas.getByText(/Last updated 2 days ago/i);
+    expect(footer).toBeInTheDocument();
     
     // Verify image is present
     const image = canvas.getByRole('img');
-    await expect(image).toBeInTheDocument();
+    expect(image).toBeInTheDocument();
   }
 };
 
