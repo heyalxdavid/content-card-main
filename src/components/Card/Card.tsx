@@ -127,6 +127,7 @@ export const Card: React.FC<CardProps> = ({
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
       tabIndex={onClick ? 0 : undefined}
+      role="article"
     >
       {shouldShowMedia && (
         <div
@@ -155,6 +156,8 @@ export const Card: React.FC<CardProps> = ({
                 'text-primary',
                 'w-full h-full'
               )}
+              role="img"
+              aria-label={heading}
             />
           ) : showImage && imageSrc ? (
             <img
@@ -200,6 +203,7 @@ export const Card: React.FC<CardProps> = ({
                     ? 'bg-primary text-white'
                     : 'bg-gray-100 text-text-primary'
                 )}
+                role="status"
               >
                 {badge.label}
               </span>
@@ -259,7 +263,7 @@ export const Card: React.FC<CardProps> = ({
           isHorizontal && "md:absolute md:bottom-0 md:left-0 md:right-0"
         )}>
           {footer.icon && (
-            <footer.icon className="w-[20px] h-[20px] text-text-primary mr-2 shrink-0" />
+            <footer.icon className="w-[20px] h-[20px] text-text-primary mr-2 shrink-0" aria-hidden="true" />
           )}
           <span className="text-[14px] text-text-primary">{footer.text}</span>
         </div>

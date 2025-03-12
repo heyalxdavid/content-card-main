@@ -89,7 +89,7 @@ export const DefaultCard: Story = {
     showButtons: true,
     showBadges: true,
     showImage: true,
-    showIcon: true,
+    showIcon: false,
     footer: {
       icon: Info,
       text: 'Last updated 2 days ago',
@@ -99,10 +99,24 @@ export const DefaultCard: Story = {
     const canvas = within(canvasElement);
 
     // Basic existence checks
-    expect(canvas.getByTestId('card-container')).toBeInTheDocument();
+    const card = canvas.getByTestId('card-container');
+    expect(card).toBeInTheDocument();
+    expect(card).toHaveAttribute('role', 'article');
+
+    // Image check
+    const image = canvas.getByRole('img');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('alt', 'Modern Design System');
+
+    // Heading checks
     expect(canvas.getByRole('heading', { name: /Modern Design System/i })).toBeInTheDocument();
-    expect(canvas.getByText(/Last updated 2 days ago/i)).toBeInTheDocument();
-    expect(canvas.getByRole('img')).toBeInTheDocument();
+    expect(canvas.getByText(/Built for scale/i)).toBeInTheDocument();
+
+    // Badge checks
+    const badges = canvas.getAllByRole('status');
+    expect(badges).toHaveLength(2);
+    expect(badges[0]).toHaveTextContent('New');
+    expect(badges[1]).toHaveTextContent('Featured');
 
     // Button checks
     const buttonContainer = canvas.getByTestId('button-container');
@@ -111,9 +125,8 @@ export const DefaultCard: Story = {
     expect(buttons[0]).toHaveTextContent('Learn More');
     expect(buttons[1]).toHaveTextContent('View Demo');
 
-    // Badge checks
-    const badges = canvas.getAllByText(/(New|Featured)/i);
-    expect(badges).toHaveLength(2);
+    // Footer check
+    expect(canvas.getByText(/Last updated 2 days ago/i)).toBeInTheDocument();
   }
 };
 
