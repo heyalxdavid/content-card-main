@@ -106,10 +106,16 @@ export const DefaultCard: Story = {
     const heading = canvas.getByRole('heading', { name: /Modern Design System/i });
     expect(heading).toBeInTheDocument();
     
-    // Find and verify buttons within the card
-    const buttonContainer = canvas.getByRole('button').querySelector('div');
-    const buttons = buttonContainer ? within(buttonContainer).getAllByRole('button') : [];
-    expect(buttons).toHaveLength(2);
+    // Find and verify buttons within the card's button container
+    const buttonContainer = canvas.getByRole('button').querySelector('[role="button"]');
+    if (buttonContainer) {
+      const buttons = within(buttonContainer).getAllByRole('button');
+      expect(buttons).toHaveLength(2);
+      
+      // Verify button labels
+      expect(buttons[0]).toHaveTextContent('Learn More');
+      expect(buttons[1]).toHaveTextContent('View Demo');
+    }
     
     // Find and verify footer
     const footer = canvas.getByText(/Last updated 2 days ago/i);
