@@ -97,33 +97,23 @@ export const DefaultCard: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    
-    // Find the card container
-    const card = canvas.getByRole('button');
-    expect(card).toBeInTheDocument();
-    
-    // Find and verify heading
-    const heading = canvas.getByRole('heading', { name: /Modern Design System/i });
-    expect(heading).toBeInTheDocument();
-    
-    // Find and verify buttons within the card's button container
-    const buttonContainer = canvas.getByRole('button').querySelector('[role="button"]');
-    if (buttonContainer) {
-      const buttons = within(buttonContainer).getAllByRole('button');
-      expect(buttons).toHaveLength(2);
-      
-      // Verify button labels
-      expect(buttons[0]).toHaveTextContent('Learn More');
-      expect(buttons[1]).toHaveTextContent('View Demo');
-    }
-    
-    // Find and verify footer
-    const footer = canvas.getByText(/Last updated 2 days ago/i);
-    expect(footer).toBeInTheDocument();
-    
-    // Verify image is present
-    const image = canvas.getByRole('img');
-    expect(image).toBeInTheDocument();
+
+    // Basic existence checks
+    expect(canvas.getByTestId('card-container')).toBeInTheDocument();
+    expect(canvas.getByRole('heading', { name: /Modern Design System/i })).toBeInTheDocument();
+    expect(canvas.getByText(/Last updated 2 days ago/i)).toBeInTheDocument();
+    expect(canvas.getByRole('img')).toBeInTheDocument();
+
+    // Button checks
+    const buttonContainer = canvas.getByTestId('button-container');
+    const buttons = within(buttonContainer).getAllByRole('button');
+    expect(buttons).toHaveLength(2);
+    expect(buttons[0]).toHaveTextContent('Learn More');
+    expect(buttons[1]).toHaveTextContent('View Demo');
+
+    // Badge checks
+    const badges = canvas.getAllByText(/(New|Featured)/i);
+    expect(badges).toHaveLength(2);
   }
 };
 

@@ -110,6 +110,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div
+      data-testid="card-container"
       className={cn(
         'rounded-2xl overflow-hidden bg-white will-change-transform group relative',
         'before:absolute before:inset-0 before:rounded-2xl before:border before:border-gray-200 before:pointer-events-none before:z-10',
@@ -125,7 +126,6 @@ export const Card: React.FC<CardProps> = ({
       )}
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
-      role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
       {shouldShowMedia && (
@@ -228,6 +228,7 @@ export const Card: React.FC<CardProps> = ({
         
         {showButtons && buttons && buttons.length > 0 && (
           <div 
+            data-testid="button-container"
             className={cn(
               'mt-5 flex flex-col md:inline-flex md:flex-row flex-wrap gap-4',
               alignment === 'center' && 'items-center md:justify-center w-full md:w-auto'
