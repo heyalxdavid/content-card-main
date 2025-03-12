@@ -177,8 +177,8 @@ export const MinimalCard: Story = {
     showFooter: true,
     showButtons: true,
     showBadges: true,
-    showImage: true,
-    showIcon: true,
+    showImage: false,
+    showIcon: false,
     footer: {
       text: 'No additional information needed',
     },

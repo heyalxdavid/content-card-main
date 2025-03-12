@@ -159,7 +159,8 @@ export const Card: React.FC<CardProps> = ({
           ) : showImage && imageSrc ? (
             <img
               src={imageSrc}
-              alt=""
+              alt={heading}
+              role="img"
               className={cn(
                 'object-cover w-full h-full',
                 isHorizontal && 'md:absolute md:inset-0'
