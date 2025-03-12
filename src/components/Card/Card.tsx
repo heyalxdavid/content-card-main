@@ -247,7 +247,7 @@ export const Card: React.FC<CardProps> = ({
                   'px-4 py-2 rounded-[4px] font-medium transition-all duration-200 transform-gpu inline-flex relative z-10 w-full md:w-auto justify-center text-[16px]',
                   button.variant === 'primary'
                     ? 'bg-primary text-white hover:bg-primary/90 shadow-sm hover:shadow-md'
-                    : 'border border-[#205EA3] text-text-primary hover:bg-gray-50 hover:border-[#205EA3]'
+                    : 'border border-[#205EA3] text-[#205EA3] hover:bg-gray-50 hover:border-[#205EA3]'
                 )}
               >
                 {button.label}
