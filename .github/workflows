@@ -1,6 +1,9 @@
-name: 'Chromatic'
+name: Chromatic Auto Update
 
-on: push
+on:
+  push:
+    branches:
+      - main # Or your main branch
 
 jobs:
   chromatic-deployment:
