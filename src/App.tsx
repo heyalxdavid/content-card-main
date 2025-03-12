@@ -7,7 +7,7 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-4xl mx-auto space-y-16">
         <section>
-          <h2 className="text-3xl font-bold text-text-secondary mb-6">Fullbleed Images</h2>
+          <h2 className="text-3xl font-bold text-text-primary mb-6">Fullbleed Images</h2>
           <div className="space-y-8">
             <Card
               eyebrow="Eyebrow"
