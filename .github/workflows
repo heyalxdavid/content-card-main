@@ -1,25 +1,28 @@
-name: Chromatic Auto Update
+name: 'Chromatic'
 
-on:
-  push:
-    branches:
-      - main # Or your main branch
+on: push
 
 jobs:
-  update_chromatic:
+  chromatic-deployment:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for Chromatic to track history
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Run Chromatic Update
-        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --exit-zero-on-changes
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # Optional: Enable TurboSnap for faster builds
+          onlyChanged: true
