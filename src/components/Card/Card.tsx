@@ -160,13 +160,13 @@ export const Card: React.FC<CardProps> = ({
             <img
               src={imageSrc}
               alt={heading}
-              role="img"
               className={cn(
                 'object-cover w-full h-full',
                 isHorizontal && 'md:absolute md:inset-0'
               )}
               loading="lazy"
               decoding="async"
+              role="img"
             />
           ) : null}
         </div>
