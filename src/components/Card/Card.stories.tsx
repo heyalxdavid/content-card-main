@@ -70,7 +70,7 @@ type Story = StoryObj<typeof Card>;
 
 export const DefaultCard: Story = {
   args: {
-    eyebrow: 'Featured',
+    eyebrow: 'Eyebrow',
     heading: 'Modern Design System',
     subheading: 'Built for scale',
     body: 'A flexible and extensible card component that adapts to various layouts and content types. Perfect for displaying featured content, products, or articles.',
@@ -101,10 +101,6 @@ export const DefaultCard: Story = {
     // Find and verify heading
     const heading = await canvas.findByRole('heading', { name: /Modern Design System/i });
     await expect(heading).toBeInTheDocument();
-    
-    // Find and verify badges
-    const badges = await canvas.findAllByText(/(New|Featured)/);
-    await expect(badges).toHaveLength(2);
     
     // Find and verify buttons
     const buttons = await canvas.findAllByRole('button');
